@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr" data-build="2026-08-17-1745">
+<html lang="en" dir="ltr" data-build="2026-08-17-2010">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Bamiyan Market · Your Neighborhood Market in Rosenheim</title>
   <meta name="description" content="Bamiyan Market in Rosenheim, Germany. Fresh groceries, authentic Afghan & Iranian specialty foods, dairy, spices, and everyday essentials.">
-  <meta name="build" content="2026-08-17-1745">
+  <meta name="build" content="2026-08-17-2010">
   <meta name="theme-color" content="#23262A">
 
   <!--
@@ -147,7 +147,16 @@
       font-weight: 700; font-style: normal; font-display: swap;
     }
 
-    html { scroll-behavior: smooth; }
+    html {
+      scroll-behavior: smooth;
+      /* `overflow-x: hidden` on body alone is unreliable in iOS Safari: the
+         html element can still widen, and the page then scrolls into empty
+         space. `clip` contains it without creating a scroll container, so it
+         also leaves position: fixed elements working. */
+      overflow-x: clip;
+      /* Stops the bounce that scrolls past the footer into a blank area. */
+      overscroll-behavior-y: none;
+    }
     html[dir="rtl"] { direction: rtl; }
 
     body {
@@ -734,6 +743,9 @@
       position: relative; width: 100%; min-height: 420px;
       display: flex; align-items: center; justify-content: center;
       perspective: 1600px; outline: none;
+      /* The neighbouring cards are deliberately positioned beyond the frame.
+         Clipping them here means they can never widen the page itself. */
+      overflow: hidden;
     }
     .coverflow-track {
       position: relative; width: 380px; height: 380px;
@@ -1072,7 +1084,7 @@
       </div>
       <div class="hero-visual fade-up">
         <div class="hero-img-frame">
-          <img data-fallback="https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=900&h=1100&fit=crop" src="https://d8j0ntlcm91z4.cloudfront.net/user_2xGIkVwDQJ1tEPRxItzV7EETQsD/hf_20260817_133823_69c553d4-fafd-4de8-ae16-c731471b5af0.png" alt="Overhead flat-lay of fresh produce, saffron, basmati rice, and dried fruits styled for Bamiyan Market" width="896" height="1152" fetchpriority="high" decoding="async">
+          <img data-fallback="https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=900&h=1100&fit=crop" src="https://d8j0ntlcm91z4.cloudfront.net/user_2xGIkVwDQJ1tEPRxItzV7EETQsD/hf_20260817_133823_69c553d4-fafd-4de8-ae16-c731471b5af0.png" alt="Overhead flat-lay of fresh produce, saffron, rice, and dried fruits styled for Bamiyan Market" width="896" height="1152" fetchpriority="high" decoding="async">
           <div class="hero-img-border"></div>
         </div>
         <div class="hero-badge hero-badge-1">
@@ -1110,7 +1122,7 @@
       </div>
       <div class="trust-item">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-        <span data-i18n="trust.lang">We Speak EN · DE · FA</span>
+        <span data-i18n="trust.lang">We Speak Persian & German</span>
       </div>
       <div class="trust-item">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
@@ -1149,8 +1161,8 @@
             <span data-i18n="about.tag">Our Story</span>
           </div>
           <h2 data-i18n="about.title">A Taste of Home, Right in Rosenheim</h2>
-          <p data-i18n="about.p1">Bamiyan Market was born from a simple idea: everyone deserves access to the flavors of home. Named after the historic Bamiyan Valley of Afghanistan, our store bridges cultures by bringing authentic Afghan and Iranian groceries to Rosenheim's diverse community.</p>
-          <p data-i18n="about.p2">We handpick every product, from fragrant basmati rice and premium saffron to fresh dairy and everyday staples, so you can trust that what you bring home is always the best quality at fair prices.</p>
+          <p data-i18n="about.p1">Bamiyan Market serves its customers with authentic Afghan and Iranian products, and works hard every day to do it well.</p>
+          <p data-i18n="about.p2">We handpick every product, from premium rice and premium saffron to fresh dairy, so the best quality reaches you at a fair price.</p>
           <div class="about-values">
             <div class="about-val">
               <div class="about-val-icon green">
@@ -1216,12 +1228,12 @@
         </div>
         <div class="product-card fade-up">
           <div class="product-card-img">
-            <img data-fallback="" src="https://images.unsplash.com/photo-1586201375761-83865001e31c?w=400&h=300&fit=crop" alt="Bags of premium basmati rice and assorted grains" width="400" height="300" loading="lazy" decoding="async">
+            <img data-fallback="" src="https://images.unsplash.com/photo-1586201375761-83865001e31c?w=400&h=300&fit=crop" alt="Bags of premium rice and assorted grains" width="400" height="300" loading="lazy" decoding="async">
             <span class="tag tag-staple" data-i18n="tag.staple">Staple</span>
           </div>
           <div class="product-card-body">
             <h3 data-i18n="prod.rice">Rice & Grains</h3>
-            <p data-i18n="prod.rice_desc">Premium Afghan basmati rice, wheat flour, bulgur, and other essential grains for your kitchen.</p>
+            <p data-i18n="prod.rice_desc">Premium rice, wheat flour, bulgur, and other essential grains for your kitchen.</p>
           </div>
         </div>
         <div class="product-card fade-up">
@@ -1231,7 +1243,7 @@
           </div>
           <div class="product-card-body">
             <h3 data-i18n="prod.beans">Beans & Lentils</h3>
-            <p data-i18n="prod.beans_desc">Red lentils, chickpeas, kidney beans, mung beans and more. Protein-packed and nutritious.</p>
+            <p data-i18n="prod.beans_desc">Red lentils, chickpeas, kidney beans, mung beans and more.</p>
           </div>
         </div>
         <div class="product-card fade-up">
@@ -1517,8 +1529,8 @@
         "stat.products_label": "Products", "stat.local": "Local", "stat.local_label": "Community",
         "about.tag": "Our Story",
         "about.title": "A Taste of Home, Right in Rosenheim",
-        "about.p1": "Bamiyan Market was born from a simple idea: everyone deserves access to the flavors of home. Named after the historic Bamiyan Valley of Afghanistan, our store bridges cultures by bringing authentic Afghan and Iranian groceries to Rosenheim’s diverse community.",
-        "about.p2": "We handpick every product, from fragrant basmati rice and premium saffron to fresh dairy and everyday staples, so you can trust that what you bring home is always the best quality at fair prices.",
+        "about.p1": "Bamiyan Market serves its customers with authentic Afghan and Iranian products, and works hard every day to do it well.",
+        "about.p2": "We handpick every product, from premium rice and premium saffron to fresh dairy, so the best quality reaches you at a fair price.",
         "val.family": "Family-owned & community-focused", "val.quality": "Quality ingredients, always fresh",
         "val.imports": "Authentic imports from Afghanistan & Iran", "val.welcome": "Friendly, welcoming atmosphere",
         "products.tag": "What We Offer", "products.title": "Explore Our Product Range",
@@ -1527,8 +1539,8 @@
         "tag.flavor": "Flavor", "tag.drinks": "Drinks", "tag.treats": "Treats", "tag.essentials": "Essentials",
         "prod.dairy": "Dairy Products", "prod.dairy_desc": "Fresh milk, yogurt, cheese, butter, and cream from trusted local and imported brands.",
         "prod.afghan": "Afghan & Iranian Specialties", "prod.afghan_desc": "Authentic saffron, dried fruits, nuts, pickles, and traditional ingredients you won’t find elsewhere.",
-        "prod.rice": "Rice & Grains", "prod.rice_desc": "Premium Afghan basmati rice, wheat flour, bulgur, and other essential grains for your kitchen.",
-        "prod.beans": "Beans & Lentils", "prod.beans_desc": "Red lentils, chickpeas, kidney beans, mung beans and more. Protein-packed and nutritious.",
+        "prod.rice": "Rice & Grains", "prod.rice_desc": "Premium rice, wheat flour, bulgur, and other essential grains for your kitchen.",
+        "prod.beans": "Beans & Lentils", "prod.beans_desc": "Red lentils, chickpeas, kidney beans, mung beans and more.",
         "prod.spices": "Spices", "prod.spices_desc": "Cumin, turmeric, cardamom, saffron threads, coriander, and signature spice blends.",
         "prod.drinks": "Drinks", "prod.drinks_desc": "Fruit juices, traditional doogh, soft drinks, tea, and refreshing imported beverages.",
         "prod.snacks": "Snacks & Sweets", "prod.snacks_desc": "Baklava, halva, roasted nuts, cookies, and traditional confections for every occasion.",
@@ -1554,7 +1566,7 @@
         "hours.weekday": "Monday - Friday", "hours.saturday": "Saturday", "hours.sunday": "Sunday", "hours.closed": "Closed",
         "loc.map_note": "Exact pin coming soon. See the address above for now.",
         "trust.family": "Family-Owned", "trust.fresh": "Fresh Stock, Daily",
-        "trust.lang": "We Speak EN · DE · FA", "trust.authentic": "Authentic Afghan & Iranian Imports",
+        "trust.lang": "We Speak Persian & German", "trust.authentic": "Authentic Afghan & Iranian Imports",
         "footer.desc": "Your trusted neighborhood market in Rosenheim for fresh groceries, authentic Afghan & Iranian specialties, and everyday essentials.",
         "footer.links": "Quick Links", "footer.products": "Products", "footer.contact": "Contact",
         "footer.rosenheim": "Rosenheim, Germany",
@@ -1573,8 +1585,8 @@
         "stat.products_label": "Produkte", "stat.local": "Lokal", "stat.local_label": "Gemeinschaft",
         "about.tag": "Unsere Geschichte",
         "about.title": "Ein Stück Heimat, mitten in Rosenheim",
-        "about.p1": "Der Bamiyan Markt entstand aus einer einfachen Idee: Jeder verdient Zugang zu den Geschmäckern der Heimat. Benannt nach dem historischen Bamiyan-Tal in Afghanistan, verbindet unser Geschäft Kulturen, indem wir authentische afghanische und iranische Lebensmittel in die vielfältige Gemeinde Rosenheims bringen.",
-        "about.p2": "Wir wählen jedes Produkt sorgfältig aus, von duftendem Basmatireis und Premium-Safran bis hin zu frischen Milchprodukten und alltäglichen Grundnahrungsmitteln, damit Sie darauf vertrauen können, dass Sie immer beste Qualität zu fairen Preisen bekommen.",
+        "about.p1": "Der Bamiyan Markt versorgt seine Kunden mit authentischen afghanischen und iranischen Produkten und gibt dabei jeden Tag sein Bestes.",
+        "about.p2": "Wir wählen jedes Produkt sorgfältig aus, von hochwertigem Reis und Premium-Safran bis zu frischen Milchprodukten, damit beste Qualität zu einem fairen Preis bei Ihnen ankommt.",
         "val.family": "Familienbetrieb & gemeinschaftsorientiert", "val.quality": "Hochwertige Zutaten, immer frisch",
         "val.imports": "Authentische Importe aus Afghanistan & Iran", "val.welcome": "Freundliche, einladende Atmosphäre",
         "products.tag": "Unser Angebot", "products.title": "Entdecken Sie unser Sortiment",
@@ -1583,8 +1595,8 @@
         "tag.flavor": "Geschmack", "tag.drinks": "Getränke", "tag.treats": "Süßes", "tag.essentials": "Basis",
         "prod.dairy": "Milchprodukte", "prod.dairy_desc": "Frische Milch, Joghurt, Käse, Butter und Sahne von vertrauenswürdigen lokalen und importierten Marken.",
         "prod.afghan": "Afghanische & iranische Spezialitäten", "prod.afghan_desc": "Authentischer Safran, Trockenobst, Nüsse, Eingelegtes und traditionelle Zutaten.",
-        "prod.rice": "Reis & Getreide", "prod.rice_desc": "Premium-Basmatireis, Weizenmehl, Bulgur und andere wichtige Getreidesorten.",
-        "prod.beans": "Bohnen & Linsen", "prod.beans_desc": "Rote Linsen, Kichererbsen, Kidneybohnen, Mungbohnen und mehr. Eiweißreich und nahrhaft.",
+        "prod.rice": "Reis & Getreide", "prod.rice_desc": "Hochwertiger Reis, Weizenmehl, Bulgur und andere wichtige Getreidesorten.",
+        "prod.beans": "Bohnen & Linsen", "prod.beans_desc": "Rote Linsen, Kichererbsen, Kidneybohnen, Mungbohnen und mehr.",
         "prod.spices": "Gewürze", "prod.spices_desc": "Kreuzkümmel, Kurkuma, Kardamom, Safranfäden, Koriander und hauseigene Gewürzmischungen.",
         "prod.drinks": "Getränke", "prod.drinks_desc": "Fruchtsäfte, traditionelles Doogh, Erfrischungsgetränke, Tee und importierte Getränke.",
         "prod.snacks": "Snacks & Süßigkeiten", "prod.snacks_desc": "Baklava, Halwa, geröstete Nüsse, Kekse und traditionelle Konfekte für jeden Anlass.",
@@ -1610,7 +1622,7 @@
         "hours.weekday": "Montag - Freitag", "hours.saturday": "Samstag", "hours.sunday": "Sonntag", "hours.closed": "Geschlossen",
         "loc.map_note": "Genauer Standort folgt in Kürze. Bitte vorerst die Adresse oben beachten.",
         "trust.family": "Familienbetrieb", "trust.fresh": "Täglich frische Ware",
-        "trust.lang": "Wir sprechen EN · DE · FA", "trust.authentic": "Authentische Importe aus Afghanistan & Iran",
+        "trust.lang": "Wir sprechen Persisch & Deutsch", "trust.authentic": "Authentische Importe aus Afghanistan & Iran",
         "footer.desc": "Ihr vertrauenswürdiger Nachbarschaftsmarkt in Rosenheim für frische Lebensmittel, authentische afghanische & iranische Spezialitäten und alltäglichen Bedarf.",
         "footer.links": "Schnellzugriff", "footer.products": "Produkte", "footer.contact": "Kontakt",
         "footer.rosenheim": "Rosenheim, Deutschland",
@@ -1629,8 +1641,8 @@
         "stat.products_label": "محصول", "stat.local": "محلی", "stat.local_label": "جامعه",
         "about.tag": "داستان ما",
         "about.title": "طعم خانه، در قلب روزنهایم",
-        "about.p1": "بامیان مارکت از یک ایده ساده متولد شد: هر کس سزاوار دسترسی به طعم‌های خانه است. با الهام از دره تاریخی بامیان افغانستان، فروشگاه ما فرهنگ‌ها را با ارائه محصولات اصیل افغانی و ایرانی به هم پیوند می‌دهد.",
-        "about.p2": "ما هر محصول را با دقت انتخاب می‌کنیم؛ از برنج باسمتی معطر و زعفران اعلا تا لبنیات تازه؛ تا بهترین کیفیت با قیمت مناسب به دستتان برسد.",
+        "about.p1": "بامیان مارکت در با عرضه محصولات افغانی و ایرانی در خدمت مشتریان خویش میباشد و تلاش میکند.",
+        "about.p2": "ما هر محصول را با دقت انتخاب می‌کنیم؛ از برنج اعلا و زعفران اعلا تا لبنیات تازه؛ تا بهترین کیفیت با قیمت مناسب به دستتان برسد.",
         "val.family": "کسب‌وکار خانوادگی", "val.quality": "مواد باکیفیت، همیشه تازه",
         "val.imports": "واردات اصیل از افغانستان و ایران", "val.welcome": "فضایی گرم و دوستانه",
         "products.tag": "محصولات ما", "products.title": "محصولات ما را کشف کنید",
@@ -1639,8 +1651,8 @@
         "tag.flavor": "طعم", "tag.drinks": "نوشیدنی", "tag.treats": "خوشمزه", "tag.essentials": "ضروری",
         "prod.dairy": "لبنیات", "prod.dairy_desc": "شیر تازه، ماست، پنیر، کره و خامه از برندهای معتبر.",
         "prod.afghan": "محصولات افغانی و ایرانی", "prod.afghan_desc": "زعفران اصیل، میوه خشک، آجیل، ترشی و مواد سنتی.",
-        "prod.rice": "برنج و غلات", "prod.rice_desc": "برنج باسمتی اعلا، آرد گندم، بلغور و غلات ضروری دیگر.",
-        "prod.beans": "حبوبات", "prod.beans_desc": "عدس قرمز، نخود، لوبیا قرمز، ماش و بیشتر؛ پرپروتئین و مغذی.",
+        "prod.rice": "برنج و غلات", "prod.rice_desc": "برنج اعلا، آرد گندم، بلغور و غلات ضروری دیگر.",
+        "prod.beans": "حبوبات", "prod.beans_desc": "عدس قرمز، نخود، لوبیا قرمز، ماش و بیشتر؛",
         "prod.spices": "ادویه‌جات", "prod.spices_desc": "زیره، زردچوبه، هل، زعفران، گشنیز و ترکیبات ویژه.",
         "prod.drinks": "نوشیدنی‌ها", "prod.drinks_desc": "آبمیوه، دوغ سنتی، نوشابه، چای و نوشیدنی‌های وارداتی.",
         "prod.snacks": "تنقلات و شیرینی", "prod.snacks_desc": "باقلوا، حلوا، آجیل بوداده، بیسکویت و شیرینی‌های سنتی.",
@@ -1666,7 +1678,7 @@
         "hours.weekday": "دوشنبه - جمعه", "hours.saturday": "شنبه", "hours.sunday": "یکشنبه", "hours.closed": "تعطیل",
         "loc.map_note": "نشانی دقیق به‌زودی؛ فعلاً به آدرس بالا مراجعه کنید.",
         "trust.family": "کسب‌وکار خانوادگی", "trust.fresh": "موجودی تازه، هر روز",
-        "trust.lang": "به زبان‌های EN · DE · FA صحبت می‌کنیم", "trust.authentic": "واردات اصیل از افغانستان و ایران",
+        "trust.lang": "به زبان‌های فارسی و آلمانی صحبت می‌کنیم", "trust.authentic": "واردات اصیل از افغانستان و ایران",
         "footer.desc": "فروشگاه محله مورد اعتماد شما در روزنهایم برای مواد غذایی تازه و محصولات افغانی و ایرانی.",
         "footer.links": "دسترسی سریع", "footer.products": "محصولات", "footer.contact": "تماس",
         "footer.rosenheim": "روزنهایم، آلمان",
@@ -1943,7 +1955,7 @@
       if (!outer || !track) return;
 
       const slides = [
-        { src: 'https://d8j0ntlcm91z4.cloudfront.net/user_2xGIkVwDQJ1tEPRxItzV7EETQsD/hf_20260817_133823_69c553d4-fafd-4de8-ae16-c731471b5af0.png', fb: 'https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=600&h=600&fit=crop', caption: 'Fresh & Local', alt: 'Flat-lay of fresh produce, saffron, and basmati rice' },
+        { src: 'https://d8j0ntlcm91z4.cloudfront.net/user_2xGIkVwDQJ1tEPRxItzV7EETQsD/hf_20260817_133823_69c553d4-fafd-4de8-ae16-c731471b5af0.png', fb: 'https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=600&h=600&fit=crop', caption: 'Fresh & Local', alt: 'Flat-lay of fresh produce, saffron, and rice' },
         { src: 'https://d8j0ntlcm91z4.cloudfront.net/user_2xGIkVwDQJ1tEPRxItzV7EETQsD/hf_20260817_133823_c0fafb23-f2a0-40e9-b910-d382ade36550.png', fb: 'https://images.unsplash.com/photo-1532336414038-cf19250c5757?w=600&h=600&fit=crop', caption: 'Inside Our Store', alt: 'Warm interior of Bamiyan Market with shelves of goods' },
         { src: 'https://images.unsplash.com/photo-1532336414038-cf19250c5757?w=600&h=600&fit=crop', caption: 'Spices & Blends', alt: 'Vibrant spices including turmeric, cumin, and saffron' },
         { src: 'https://d8j0ntlcm91z4.cloudfront.net/user_2xGIkVwDQJ1tEPRxItzV7EETQsD/hf_20260817_135846_81f61f40-83dd-4c53-9ca3-3309b88e7ea8.png', fb: 'https://images.unsplash.com/photo-1586201375761-83865001e31c?w=600&h=600&fit=crop', caption: 'Beans & Lentils', alt: 'Bowls of assorted dried beans and lentils' },
@@ -1955,7 +1967,7 @@
       // Spread and depth scale down on phones so the neighbouring cards still
       // peek into frame instead of being flung off the side of the screen.
       const metrics = () => (window.innerWidth < 600
-        ? { depth: 150, gap: 3.6 }
+        ? { depth: 130, gap: 2.9 }
         : { depth: 220, gap: 8 });
       let active = 0;
       let locked = false;
