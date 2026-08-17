@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr" data-build="2026-08-17-2010">
+<html lang="en" dir="ltr" data-build="2026-08-17-2115">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Bamiyan Market · Your Neighborhood Market in Rosenheim</title>
   <meta name="description" content="Bamiyan Market in Rosenheim, Germany. Fresh groceries, authentic Afghan & Iranian specialty foods, dairy, spices, and everyday essentials.">
-  <meta name="build" content="2026-08-17-2010">
+  <meta name="build" content="2026-08-17-2115">
   <meta name="theme-color" content="#23262A">
 
   <!--
@@ -154,8 +154,16 @@
          space. `clip` contains it without creating a scroll container, so it
          also leaves position: fixed elements working. */
       overflow-x: clip;
-      /* Stops the bounce that scrolls past the footer into a blank area. */
+      /* iOS Safari ignores this on the document, but it does help elsewhere. */
       overscroll-behavior-y: none;
+
+      /* iOS rubber-band scrolling drags the page past its end and reveals the
+         canvas behind it. With a light canvas that read as an endless white
+         void below the footer. Painting the canvas in the footer's own colour
+         makes the bounce look like the footer simply continuing.
+         The top of the page is light, so the nav carries a matching shield
+         upwards (see .nav::before) to cover the bounce at that end. */
+      background: var(--ink-deep);
     }
     html[dir="rtl"] { direction: rtl; }
 
@@ -250,6 +258,12 @@
       backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
       border-bottom: 1px solid var(--border);
       transition: background var(--transition), box-shadow var(--transition);
+    }
+    /* Covers the area revealed by an upward rubber-band bounce. Anchored to
+       the fixed nav, so it never contributes to the page's scroll height. */
+    .nav::before {
+      content: ''; position: absolute; bottom: 100%; left: 0; right: 0;
+      height: 100vh; background: var(--page); pointer-events: none;
     }
     .nav.scrolled {
       background: rgba(252, 252, 251, 0.96);
@@ -1003,7 +1017,10 @@
       .why-grid { grid-template-columns: 1fr; }
       .about-values { grid-template-columns: 1fr; }
       .footer-top { grid-template-columns: 1fr; gap: 36px; }
-      .footer-bottom { flex-direction: column; text-align: center; }
+      .footer-bottom {
+        flex-direction: column; text-align: center;
+        padding-bottom: calc(34px + env(safe-area-inset-bottom, 0px));
+      }
     }
 
     @media (max-width: 480px) {
@@ -1849,12 +1866,21 @@
 
     // Once the contact block is on screen the pill has done its job, so it
     // steps out of the way rather than covering the content it points at.
-    const contactBlock = document.getElementById('contact');
     const fab = document.getElementById('waFab');
-    if (contactBlock && fab && 'IntersectionObserver' in window) {
-      new IntersectionObserver(entries => {
-        entries.forEach(en => fab.classList.toggle('is-hidden', en.isIntersecting));
-      }, { threshold: 0.25 }).observe(contactBlock);
+    const hideOver = [document.getElementById('contact'), document.querySelector('.footer')]
+                       .filter(Boolean);
+    if (fab && hideOver.length && 'IntersectionObserver' in window) {
+      // The pill is a shortcut to the contact details. Once either the contact
+      // block or the footer is on screen those details are already visible, so
+      // the pill steps aside instead of covering the text underneath it.
+      const visible = new Set();
+      const io = new IntersectionObserver(entries => {
+        entries.forEach(en => {
+          if (en.isIntersecting) visible.add(en.target); else visible.delete(en.target);
+        });
+        fab.classList.toggle('is-hidden', visible.size > 0);
+      }, { threshold: 0.08 });
+      hideOver.forEach(el => io.observe(el));
     }
 
     document.querySelectorAll('.lang-btn').forEach(btn => {
